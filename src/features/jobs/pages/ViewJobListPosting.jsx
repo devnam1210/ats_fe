@@ -1,40 +1,52 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import jobService from "../services/job.service";
-import { useState } from "react";
 import JobCard from "../components/JobCard";
 
-export default function ViewJobListPosting() {
-    // React hook
-    const [jobs, setJobs] = useState([]); // [], null, undefined, {}, 0, false, "" 
-    // Mounting --> Call API --> Set data to state --> Re-render UI
+const ViewJobListPosting = () => {
+  // React Hooks
+  const [jobs, setJobs] = useState([]); // [], null, undefined, 0, false, ''
 
-    // Param 1: callback function: function to be executed after component is mounted
-    // Param 2:[] dependency array: array of dependencies that the effect depends on. If any of the dependencies change, the effect will be re-run. If the array is empty, the effect will only run once after the initial render.
-    useEffect(() => {
-         async function fetchJobs() {
-        // Call API to get all jobs
-            const jobs = await jobService.findAll();
+  // Mounting --> Call API to get all job postings
+  // Param 1: callback function to execute
+  // Param 2: [] --> only execute callback function when component is mounted (first time render)
+  useEffect(() => {
+    async function fetchData() {
+      // Call service to get all job postings
+      const response = await jobService.findAll();
+      console.log(response);
 
-            console.log(jobs);
-            //change state
-            setJobs(jobs);
-        }
-        fetchJobs();
-    }, []); 
+      // Change state
+      setJobs(response);
+      // ...
+    }
+    fetchData();
+  }, []);
 
+  const addToMyFavourite = async (job) => {
+    // Implementation for adding job to favourites
 
+    console.log("Adding job to favourites:", job);
 
-    return (
-        <div className='container' style={{height: "100vh"}}>
-            <h3 className='my-3'>Open Positions</h3>
-                <div className='row d-flex justify-content-start align-items-start'>
-                {jobs.map((job) => {
-                    return (<div className='col-6 md-6 g-1 my-3' key = {job.id}>
-                        <JobCard job={job} />   
-                    </div>) // truyền job vào JobCard để hiển thị thông tin chi tiết của từng job
-                })}
-                </div>
-        </div>
-    );
-}
+    job.numberOfApplicants += 1; // Update UI immediately
+    job.numberOfFavourites += 1; // Update UI immediately
+
+    await jobService.addToMyFavourite(job.id);
+  }
+
+  return (
+    <div className="container" style={{ height: "100vh" }}>
+      <h3 className="my-3">Open Positions</h3>
+      <div
+        className="row d-flex justify-content-start align-items-start">
+        {jobs.map((job) => (
+          <div className="col-md-6 g-3 my-3" key={job.id}>
+            <JobCard job={job} addToMyFavourite={addToMyFavourite} />
+          </div>
+        ))}
+      </div>
+      <div className="row d-flex justify-content-start align-items-start"></div>
+    </div>
+  );
+};
+
+export default ViewJobListPosting;

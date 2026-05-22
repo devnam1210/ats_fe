@@ -1,69 +1,76 @@
+const jobs = [
+    {
+        id: 1,
+        title: "Software Engineer",
+        category: "Engineering",
+        location: "Mountain View, CA",
+        salary: "$120,000 - $150,000",
+        skills: ["Java", "Python", "C++", "AWS"],
+        employmentType: "Full-time",
+        description: "We are looking for a Software Engineer to join our team. You will be responsible for developing high-quality software solutions that meet our customers' needs.",
+        requirements: [
+            "Bachelor's degree in Computer Science or related field",
+            "3+ years of experience in software development",
+            "Proficiency in Java, Python, or C++",
+            "Experience with cloud technologies (AWS, Azure, GCP) is a plus"
+        ],
+        numberOfApplicants: 0,
+        numberOfFavourites: 0
+    },
+    {
+        id: 2,
+        title: "Data Scientist",
+        category: "Data Science",
+        location: "Menlo Park, CA",
+        salary: "$110,000 - $140,000",
+        skills: ["Python", "R", "SQL"],
+        employmentType: "Full-time",
+        description: "We are seeking a Data Scientist to analyze large datasets and provide insights that will help drive our business decisions. You will work closely with cross-functional teams to identify opportunities for leveraging data to drive business solutions.",
+        requirements: [
+            "Master's degree in Data Science, Statistics, or related field",
+            "2+ years of experience in data science or analytics",
+            "Proficiency in Python, R, or SQL",
+            "Experience with machine learning algorithms and techniques"
+        ],
+        numberOfApplicants: 0,
+        numberOfFavourites: 0
+    },
+    {
+        id: 3,
+        title: "Product Manager",
+        category: "Product Management",
+        location: "San Francisco, CA",
+        salary: "$100,000 - $130,000",
+        skills: ["Agile", "Scrum", "JIRA"],
+        employmentType: "Full-time",
+        description: "We are looking for a Product Manager to lead the development and launch of new products. You will work closely with engineering, design, and marketing teams to ensure successful product delivery.",
+        requirements: [
+            "Bachelor's degree in Business, Computer Science, or related field",
+            "5+ years of experience in product management",
+            "Strong understanding of Agile methodologies and tools (Scrum, JIRA)",
+            "Excellent communication and leadership skills"
+        ],
+        numberOfApplicants: 0,
+        numberOfFavourites: 0
+    }
+];
+
 const jobService = {
-    findAll: () => {
-        const jobs = [{
-                id: 1,
-                title: "Senior Java Developer",
-                category: "Engineering",
-                skills: ["Java", "Spring Boot", "PostgreSQL"],
-                employmentType: "Full-time",
-                location: "Ho Chi Minh City, Vietnam",
-                postedTime: "Posted 2 days ago",
-                description: "Design, develop, and maintain high-quality Java applications using Spring Boot framework. Collaborate with teams..."
-            },
-            {
-                id: 2,
-                title: "UI/UX Designer",
-                category: "Design",
-                skills: ["Figma", "UX Research", "Prototyping"],
-                employmentType: "Full-time",
-                location: "Ho Chi Minh City, Vietnam",
-                postedTime: "Posted 5 days ago",
-                description: "Create intuitive and visually stunning user interfaces. Conduct user research and usability testing..."
-            },
-            {
-                id: 3,
-                title: "DevOps Engineer",
-                category: "Engineering",
-                skills: ["Docker", "K8s", "AWS", "Terraform"],
-                employmentType: "Full-time",
-                location: "Ha Noi, Vietnam",
-                postedTime: "Posted 1 week ago",
-                description: "Build and maintain CI/CD pipelines, manage cloud infrastructure, and ensure system reliability..."
-            },
-            {
-                id: 4,
-                title: "Product Manager",
-                category: "Product",
-                skills: ["Agile", "Jira", "Roadmap"],
-                employmentType: "Full-time",
-                location: "Ho Chi Minh City, Vietnam",
-                postedTime: "Posted 3 days ago",
-                description: "Define product vision, roadmap, and strategy. Work closely with engineering and design teams..."
-            },
-            {
-                id: 5,
-                title: "Digital Marketing Specialist",
-                category: "Marketing",
-                isNew: true,
-                skills: ["SEO", "Google Ads", "Analytics"],
-                employmentType: "Contract",
-                location: "Remote",
-                postedTime: "Posted 1 day ago",
-                description: "Plan and execute digital marketing campaigns across multiple channels including SEO, SEM, social media..."
-            },
-            {
-                id: 6,
-                title: "Data Analyst",
-                category: "Analytics",
-                skills: ["SQL", "Python", "Power BI"],
-                employmentType: "Full-time",
-                location: "Ho Chi Minh City, Vietnam",
-                postedTime: "Posted 4 days ago",
-                description: "Analyze business data, build dashboards, and provide actionable insights to support decision-making..."
-            }
-        ];
+    findAll: async () => {
+        // call api to get all 
+
         return jobs;
     },
-};
+    addToMyFavourite: async (id) => {
+        // call api to add job to my favourite list
+        localStorage.setItem("favouriteJobs", JSON.stringify([...JSON.parse(localStorage.getItem("favouriteJobs") || "[]"), id]));
+    },
 
+    viewMyFavourite: async () => {
+
+    }
+
+
+
+}
 export default jobService;
