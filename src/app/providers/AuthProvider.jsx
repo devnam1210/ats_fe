@@ -1,23 +1,24 @@
-import { createContext, useState } from "react";
+import react from "react";
+import CandidateLogin from "../features/auth/pages/CandidateLogin";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import jobRoutes from "@/features/jobs/routes";
+import publicRoutes from "@/features/publics/routes";
+function App() {
+  // Logic
 
-export const AuthContext = createContext();
+  // UI
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Define your routes here */}
+        <Route path="/login" element={<CandidateLogin />} />
+        <Route path="/register" element={<CandidateLogin />} />
+        {jobRoutes}
+      
+        {publicRoutes}
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
-
-export const AuthProvider = ({ children }) => {
-    // Logic for authentication (e.g., login, logout, check auth status)
-    const [user, setUser] = useState(null);
-
-    const login = (response) => {
-        setUser(response);
-        localStorage.setItem("user", JSON.stringify(response)); // Store user data in localStorage
-    }
-
-    const dataContext = { user };
-    const actionContext = { login };
-    return (
-        <AuthContext.Provider value={{ ...dataContext, ...actionContext }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-
+export default App;

@@ -1,49 +1,19 @@
-import React, { useContext } from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { AuthContext } from '../../app/providers/AuthProvider';
+import { Col, Container, Row } from "react-bootstrap";
 
-const PublicSidebar = () => {
-    const { user } = useContext(AuthContext);
+const HeroSection2 = () => {
+  return (
+    <Container fluid>
+      <Row
+        className="justify-content-center align-items-center pt-5 pb-5"
+        style={{ height: "auto", backgroundColor: "#4238C3"}}>
+        <Col md={12}>
+            <h1 className="text-center text-white display-4">Join Our Team</h1>
+            <p className="text-center text-white lead">Discover exciting career opportunities and be part of our innovative team.</p>
 
-    return (
-        <Navbar expand="lg" bg="white" className="border-bottom py-3">
-            <Container>
-                <Navbar.Brand href="#" className="d-flex align-items-center fw-bold text-dark gap-2">
-                    <span className="d-inline-flex align-items-center justify-content-center text-white rounded"
-                        style={{ width: '32px', height: '32px', backgroundColor: '#4A3AFF' }}
-                    >T</span>
-                    TechCorp
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarNav" />
-                <Navbar.Collapse id="navbarNav" className="justify-content-between">
-                    <Nav className="mx-auto gap-2">
-                        <Nav.Link href="#" className="text-secondary">Home</Nav.Link>
-                        <Nav.Link href="#" className="text-secondary">About Us</Nav.Link>
-                        <Nav.Link href="#"
-                            className="fw-semibold px-0 active text-dark border-bottom border-2"
-                            style={{ borderColor: '#4A3AFF' }}
-                        >Careers</Nav.Link>
-                        <Nav.Link href="#" className="text-secondary">Culture</Nav.Link>
-                        <Nav.Link href="#" className="text-secondary">Benefits</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                <div className="d-flex align-items-center gap-3">
-                    {user ? (<span>Welcome, {user.email}</span>) : 
-                        (<>
-                            <Nav.Link href="#" className="text-secondary fw-medium">Login</Nav.Link>
-                            <Button
-                                className="text-white px-4 py-2 rounded-2 fw-medium"
-                                style={{ backgroundColor: '#4A3AFF' }}>
-                                Sign Up
-                            </Button>
-                        </>)
-                    }
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-                </div>
-            </Container>
-        </Navbar>
-    );
-}
-
-export default PublicSidebar;
-
+export default HeroSection2;
